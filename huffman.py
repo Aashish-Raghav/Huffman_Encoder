@@ -67,7 +67,7 @@ class HuffmanEncoder:
         # build huffman tree
         rootNode = self.build_huffman_tree()
 
-        #prefix-code table
+        # codes table
         codes = self.build_huffman_code(rootNode)
 
         encoded_text = str(self.freq) + '\n'
@@ -75,4 +75,27 @@ class HuffmanEncoder:
             encoded_text += str(codes[char])
 
         return encoded_text
+    
+    def decode(self,encoded_text):
+        self.freq = eval(encoded_text.split('\n')[0])
+        
+        # build huffman tree
+        rootNode = self.build_huffman_tree()
+        
+        text_to_decode = encoded_text.split('\n')[1]
+        decoded_text = []
+        
+        node = rootNode
+        for bit in text_to_decode:
+            if (bit == '0'):
+                node = node.left
+            else:
+                node = node.right
+            
+            if (node.char):
+                decoded_text.append(node.char)
+                node = rootNode
+
+        return "".join(decoded_text)
+            
         
