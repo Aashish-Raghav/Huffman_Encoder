@@ -12,6 +12,7 @@ def main():
         try:
             encode_text = file_handle.read()
             huffman = HuffmanEncoder(encode_text)
+            huffman.encode()
 
         except:
             print("Can't read from file")
